@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="assets/imgs/favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="app">
+      <div class="container">
+        <h1>Product Management System</h1>
+        <form>
+          <div class="input">
+            <input
+              type="text"
+              name="product-name"
+              id="product-name"
+              placeholder="Product Name"
+              autocomplete="off"
+            />
+            <span
+              id="error-message-name"
+              class="error-message-name error-message"
+            >
+              *Please Enter A Valid Data
+            </span>
+          </div>
+          <div class="input">
+            <input
+              type="text"
+              name="product-category"
+              id="product-category"
+              placeholder="product category"
+              list="product-category-list"
+              autocomplete="off"
+            />
+            <span
+              id="error-message-category"
+              class="error-message-category error-message"
+            >
+              *Please Enter A Valid Data
+            </span>
+          </div>
+          <datalist id="product-category-list">
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Home & Garden">Home & Garden</option>
+            <option value="Sports & Outdoors">Sports & Outdoors</option>
+            <option value="Toys & Games">Toys & Games</option>
+            <option value="Books & Literature">Books & Literature</option>
+            <option value="Beauty & Personal Care">
+              Beauty & Personal Care
+            </option>
+            <option value="Automotive">Automotive</option>
+            <option value="Other">Other</option>
+          </datalist>
+          <div class="input">
+            <input
+              type="number"
+              name="product-price"
+              id="product-price"
+              placeholder="Product Price"
+              autocomplete="off"
+            />
+            <span
+              id="error-message-price"
+              class="error-message-price error-message"
+            >
+              *Please Enter A Valid Data
+            </span>
+          </div>
+          <div class="input">
+            <input
+              type="file"
+              name="product-image"
+              id="product-image"
+              accept="image/*"
+            />
+          </div>
+          <button id="add-product-button" type="button">Add Product</button>
+          <button id="update-product-button" type="button">
+            Update Product
+          </button>
+          <p id="hint-to-validate" class="hint-to-validate">
+            Enter A Valid Data
+          </p>
+        </form>
+        <div class="products-area">
+          <div class="statistics">
+            <div class="statistics-item">
+              <span>Total Products</span>
+              <span id="total-products">0</span>
+            </div>
+            <div class="statistics-item">
+              <span>Total Amount</span>
+              <span id="total-amount">0</span>
+            </div>
+          </div>
+          <div class="categories">
+            <button
+              id="all-products-button"
+              data-category="all"
+              type="button"
+              class="active"
+            >
+              All Products
+            </button>
+            <button
+              id="electronics-products-button"
+              data-category="electronics"
+              type="button"
+            >
+              Electronics
+            </button>
+            <button
+              id="clothing-products-button"
+              data-category="clothing"
+              type="button"
+            >
+              Clothing
+            </button>
+            <button
+              id="home-garden-products-button"
+              data-category="home & garden"
+              type="button"
+            >
+              Home & Garden
+            </button>
+            <button
+              id="sports-outdoors-products-button"
+              data-category="sports & outdoors"
+              type="button"
+            >
+              Sports
+            </button>
+            <button
+              id="toys-games-products-button"
+              data-category="toys & games"
+              type="button"
+            >
+              Toys & Games
+            </button>
+            <button
+              id="books-literature-products-button"
+              data-category="books & literature"
+              type="button"
+            >
+              Books
+            </button>
+            <button
+              id="beauty-personal-care-products-button"
+              data-category="beauty & personal care"
+              type="button"
+            >
+              Personal Care
+            </button>
+          </div>
+          <div class="search">
+            <input
+              type="text"
+              name="search"
+              id="search-input"
+              placeholder="Search Product"
+              autocomplete="off"
+            />
+          </div>
+          <div class="products-list" id="products-list"></div>
+          <button id="clear-products-button" type="button">
+            Clear All Products
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
