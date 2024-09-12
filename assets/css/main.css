@@ -67,33 +67,25 @@ body {
   .app h1 {
     font-size: 30px;
   }
-  .app form {
-    margin-top: 80px;
-  }
+
 }
 @media screen and (max-width: 490px) {
   .app h1 {
-    font-size: 25px;
+    font-size: 23px;
   }
-  .app form {
-    margin-top: 70px;
-  }
+
 }
 @media screen and (max-width: 416px) {
   .app h1 {
-    font-size: 20px;
+    font-size: 18px;
   }
-  .app form {
-    margin-top: 65px;
-  }
+
 }
 @media screen and (max-width: 350px) {
   .app h1 {
-    font-size: 18px;
+    font-size: 15px;
   }
-  .app form {
-    margin-top: 60px;
-  }
+
 }
 
 .app form input {
@@ -193,21 +185,6 @@ body {
 }
 .app form button#update-product-button {
   background-image: linear-gradient(to right, #fe7a36, #fba834);
-  display: none;
-}
-.app form .hint-to-validate {
-  text-align: center;
-  background-image: linear-gradient(to right, #f00909, #b76b00);
-  width: 100%;
-  padding: 6px;
-  border: 1px solid #ccc;
-  outline: none;
-  cursor: pointer;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  border-radius: 4px;
   display: none;
 }
 /* ^ Products styles */

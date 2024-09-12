@@ -22,6 +22,7 @@ const deleteProductButton = document.getElementById("delete-product-button");
 let products = JSON.parse(localStorage.getItem("products")) || [];
 // ~ regex variables
 let dataIsValid = false;
+let productsIsEmpty = false;
 const nameRegex = /^[A-Z][A-z1-9 \-]{5,25}$/;
 const categoryRegex = /^[A-Z][A-z& ]{2,20}$/;
 const priceRegex = /^[1-9][\d]{0,5}$/;
@@ -45,6 +46,18 @@ function passNewFileInput(index) {
   // Set the new FileList as the files property of the input
   return dataTransfer.files;
 }
+function removeAndDisplaySearchInput() {
+  productsIsEmpty = products.length <= 4;
+  if (productsIsEmpty) {
+    searchInput.style.cssText = `
+    display: none;
+    `;
+  } else {
+    searchInput.style.cssText = `
+    display: block;
+    `;
+  }
+}
 function displayAllProducts() {
   productsList.innerHTML = "";
   products.forEach((product, index) => {
@@ -62,11 +75,14 @@ function clearAllProducts() {
   products = [];
   localStorage.removeItem("products");
   productsList.innerHTML = "";
+  productsIsEmpty = true;
   clearProductsButton.style.display = "none";
   updateStatistics();
+  removeAndDisplaySearchInput();
 }
 updateStatistics();
 displayAllProducts();
+removeAndDisplaySearchInput();
 function dataIsValidOrNot() {
   if (
     nameRegex.test(productNameInput.value) &&
@@ -96,21 +112,6 @@ function dataIsValidOrNot() {
     return false;
   }
 }
-function hideHint() {
-  productNameInput.onfocus = () => {
-    addProductButton.style.display = "block";
-    hintToValidateButton.style.display = "none";
-  };
-  productCategoryInput.onfocus = () => {
-    addProductButton.style.display = "block";
-    hintToValidateButton.style.display = "none";
-  };
-  productPriceInput.onfocus = () => {
-    addProductButton.style.display = "block";
-    hintToValidateButton.style.display = "none";
-  };
-}
-hideHint();
 function addProduct() {
   if (dataIsValidOrNot()) {
     products.push({
@@ -125,16 +126,14 @@ function addProduct() {
     displayProduct(products.length - 1);
     updateStatistics();
     clearInputFields();
-  } else {
-    addProductButton.style.display = "none";
-    hintToValidateButton.style.display = "block";
+    removeAndDisplaySearchInput();
   }
 }
 function displayProduct(index) {
   productsList.innerHTML += `
   <div class="product-item" data-index="${index}">
     <div class="product-image">
-      <img src="${products[index].image}" alt="product image" />
+      <img src="${products[index]?.image || "assets/imgs/placeholder.svg"}" alt="product image" />
     </div>
     <div class="product-info">
     <h3>${products[index].name}</h3>
@@ -165,6 +164,7 @@ function deleteProduct(index) {
     clearProductsButton.style.display = "none";
   }
   updateStatistics();
+  removeAndDisplaySearchInput();
 }
 function editProduct(index) {
   addProductButton.style.display = "none";
@@ -178,16 +178,18 @@ function editProduct(index) {
     behavior: "smooth",
   });
   updateProductButton.onclick = () => {
-    products[index].name = productNameInput.value;
-    products[index].category = productCategoryInput.value;
-    products[index].price = productPriceInput.value;
-    products[index].image = `assets/imgs/${productImageInput.files[0]?.name}`;
-    localStorage.setItem("products", JSON.stringify(products));
-    displayAllProducts();
-    clearInputFields();
-    updateStatistics();
-    addProductButton.style.display = "block";
-    updateProductButton.style.display = "none";
+    if(dataIsValidOrNot()) {
+      products[index].name = productNameInput.value;
+      products[index].category = productCategoryInput.value;
+      products[index].price = productPriceInput.value;
+      products[index].image = `assets/imgs/${productImageInput.files[0]?.name}`;
+      localStorage.setItem("products", JSON.stringify(products));
+      displayAllProducts();
+      clearInputFields();
+      updateStatistics();
+      addProductButton.style.display = "block";
+      updateProductButton.style.display = "none";
+    }
   };
 }
 function searchProduct() {
@@ -207,6 +209,7 @@ function searchProduct() {
 function exitSearch() {
   searchInput.value = "";
   displayAllProducts();
+  removeAndDisplaySearchInput();
 }
 function displayProductsByCategory(category) {
   productsList.innerHTML = "";
